@@ -9,6 +9,12 @@
 3. 在命令行中执行 `yarn dev --no-cache`，命令运行完毕后，会显示本地可查看链接，点击或复制到浏览器查看即可
 4. 公共文档同步请查看：https://gitcode.com/dcloud/docs-common
 
+## 如何同步公共文档
+
+1. 在 `docs-common` 仓库中更新文档
+   - 如果是已有的文档，直接在 `docs-common` 仓库中修改即可
+   - 如果是新增的文档，需要在 `docs-common` 仓库中创建新的 md 文件，并在 `./docs-sync.config.ts` 中添加对应同步配置
+
 ## 文档编写注意事项
 
 1. 右侧导航仅支持二级、三级、四级

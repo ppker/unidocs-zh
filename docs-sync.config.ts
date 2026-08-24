@@ -48,6 +48,7 @@ export default defineConfig({
       'ai/use-ui-mcp.md',
       'ai/personal-subscription.md',
       'ai/enterprise-subscription.md',
+      'ai/cli-for-aimodel.md',
     ]),
     // worktile
     ...createSyncMapping([
