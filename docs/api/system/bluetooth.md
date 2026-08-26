@@ -1,12 +1,12 @@
-**蓝牙 API 平台差异说明**
+## uni.openBluetoothAdapter(OBJECT)
+
+初始化蓝牙模块
+
+**平台差异说明**
 
 |App|HarmonyOS Next|H5|微信小程序|支付宝小程序|百度小程序|抖音小程序|飞书小程序|QQ小程序|快手小程序|京东小程序|元服务|
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 |√|x|x|√|√|x|x|√|x|x|√|√|
-
-## uni.openBluetoothAdapter(OBJECT)
-
-初始化蓝牙模块
 
 **OBJECT 参数说明**
 
@@ -56,6 +56,11 @@ uni.openBluetoothAdapter({
 
 开始搜寻附近的蓝牙外围设备。**此操作比较耗费系统资源，请在搜索并连接到设备后调用 [`uni.stopBluetoothDevicesDiscovery`](/api/system/bluetooth?id=stopbluetoothdevicesdiscovery) 方法停止搜索。**
 
+**平台差异说明**
+
+|App|HarmonyOS Next|H5|微信小程序|支付宝小程序|百度小程序|抖音小程序|飞书小程序|QQ小程序|快手小程序|京东小程序|元服务|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|√|x|x|√|√|x|x|√|x|x|√|√|
 
 **OBJECT 参数说明**
 
@@ -112,6 +117,12 @@ uni.startBluetoothDevicesDiscovery({
 
 监听寻找到新设备的事件
 
+**平台差异说明**
+
+|App|HarmonyOS Next|H5|微信小程序|支付宝小程序|百度小程序|抖音小程序|飞书小程序|QQ小程序|快手小程序|京东小程序|元服务|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|√|x|x|√|√|x|x|√|x|x|√|√|
+
 **CALLBACK 返回参数**
 
 |属性|类型|说明|
@@ -158,6 +169,12 @@ uni.onBluetoothDeviceFound(function (devices) {
 
 停止搜寻附近的蓝牙外围设备。若已经找到需要的蓝牙设备并不需要继续搜索时，建议调用该接口停止蓝牙搜索。
 
+**平台差异说明**
+
+|App|HarmonyOS Next|H5|微信小程序|支付宝小程序|百度小程序|抖音小程序|飞书小程序|QQ小程序|快手小程序|京东小程序|元服务|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|√|x|x|√|√|x|x|√|x|x|√|√|
+
 **OBJECT 参数说明**
 
 |属性|类型|默认值|必填|说明|
@@ -201,6 +218,12 @@ uni.stopBluetoothDevicesDiscovery({
 
 监听蓝牙适配器状态变化事件
 
+**平台差异说明**
+
+|App|HarmonyOS Next|H5|微信小程序|支付宝小程序|百度小程序|抖音小程序|飞书小程序|QQ小程序|快手小程序|京东小程序|元服务|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|√|x|x|√|√|x|x|√|x|x|√|√|
+
 **CALLBACK 返回参数**
 
 |属性|类型|说明|
@@ -219,6 +242,12 @@ uni.onBluetoothAdapterStateChange(function (res) {
 ## uni.getConnectedBluetoothDevices(OBJECT)
 
 根据 uuid 获取处于已连接状态的设备。
+
+**平台差异说明**
+
+|App|HarmonyOS Next|H5|微信小程序|支付宝小程序|百度小程序|抖音小程序|飞书小程序|QQ小程序|快手小程序|京东小程序|元服务|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|√|x|x|√|√|x|x|√|x|x|√|√|
 
 **OBJECT 参数说明**
 
@@ -275,6 +304,12 @@ uni.getConnectedBluetoothDevices({
 ## uni.getBluetoothDevices(OBJECT)
 
 获取在蓝牙模块生效期间所有已发现的蓝牙设备。包括已经和本机处于连接状态的设备。
+
+**平台差异说明**
+
+|App|HarmonyOS Next|H5|微信小程序|支付宝小程序|百度小程序|抖音小程序|飞书小程序|QQ小程序|快手小程序|京东小程序|元服务|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|√|x|x|√|√|x|x|√|x|x|√|√|
 
 **OBJECT 参数说明**
 
@@ -353,6 +388,12 @@ uni.getBluetoothDevices({
 
 获取本机蓝牙适配器状态。
 
+**平台差异说明**
+
+|App|HarmonyOS Next|H5|微信小程序|支付宝小程序|百度小程序|抖音小程序|飞书小程序|QQ小程序|快手小程序|京东小程序|元服务|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|√|x|x|√|√|x|x|√|x|x|√|√|
+
 **OBJECT 参数说明**
 
 |属性|类型|默认值|必填|说明|
@@ -401,6 +442,12 @@ uni.getBluetoothAdapterState({
 ## uni.closeBluetoothAdapter(OBJECT)
 
 关闭蓝牙模块。调用该方法将断开所有已建立的连接并释放系统资源。建议在使用蓝牙流程后，与 [`uni.openBluetoothAdapter`](/api/system/bluetooth?id=openbluetoothadapter) 成对调用。
+
+**平台差异说明**
+
+|App|HarmonyOS Next|H5|微信小程序|支付宝小程序|百度小程序|抖音小程序|飞书小程序|QQ小程序|快手小程序|京东小程序|元服务|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|√|x|x|√|√|x|x|√|x|x|√|√|
 
 **OBJECT 参数说明**
 
