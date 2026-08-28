@@ -54,6 +54,10 @@
 
 > 使用 XCode 的 xcodebuild 命令编译  
 
+- **从2026年8月30号开始HBuilderX5.14及以上alpha版本云端打包环境已升级为XCode26.6**  
+- **从2026年3月22号开始HBuilderX4.66及以上release版本云端部分打包机环境升级为XCode26.3**
+
+
 ### HBuilderX5.25及以上版本云端打包环境
 - XCode: 26.6  
 - iOS SDK: 26.5  
@@ -68,14 +72,4 @@
 - pod仓库：https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git  
 
 **更新XCode26.3后最低支持iOS13系统**
-
-### HBuilderX4.41及以上版本云端打包环境
-- XCode: 16.1  
-- iOS SDK: 18.1  
-- pod仓库：https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git  
-
-### HBuilderX4.36及以下版本云端打包环境（不推荐使用）
-- XCode：15.4  
-- iOS SDK：17.5  
-- pod仓库：https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git  
 
