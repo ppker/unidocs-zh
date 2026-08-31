@@ -30,7 +30,9 @@
 
 ## 环境要求
 
-- 客户端：仅支持 **uni-app** 项目（`HBuilderX 5.13+` 或对应 `CLI` 版本）。
+- 客户端：支持 **uni-app** 项目，以及使用 `HBuilderX 5.25+` 的 **uni-app x** 项目。
+- uni-app x 的 App 端目前仅支持蒸汽模式，支持 App-Android、App-iOS 和 App-Harmony；同时支持 Web 和微信小程序。
+- uni-app x App 的 VDOM 模式暂不支持框架内置的 uni统计2.0，需使用 [uni-app x App VDOM 模式统计方案](uni-stat-uniappx.md#vdom)。
 - 开启方式：在业务项目的 `manifest.json` 中配置 `uniStatistics`，`type` 为 `"public"`（公有版，默认值）。
 - 控制台：使用 DCloud 账号登录 [https://tongji.dcloud.net.cn](https://tongji.dcloud.net.cn)。
 
@@ -45,6 +47,21 @@
 ![选择 uni统计](https://web-ext-storage.dcloud.net.cn/stat/kaitong.png)
 
 可视化配置对应源码中的 `uniStatistics` 节点，核心字段为 `enable: true` 与 `type: "public"`（见下文 [manifest 配置](#manifest-配置)）。
+
+#### uni-app x 支持说明@uni-app-x
+
+从 `HBuilderX 5.25` 起，uni统计2.0支持 uni-app x 蒸汽模式。统计模块由框架内置，无需安装或引用 `uni_modules/uni-stat`，应用启动、前后台切换和页面访问等数据由框架自动采集。
+
+|平台|支持情况|说明|
+|:-:|:-:|:-|
+|App-Android|支持|仅支持蒸汽模式|
+|App-iOS|支持|仅支持蒸汽模式|
+|App-Harmony|支持|仅支持蒸汽模式|
+|Web|支持|使用框架内置统计|
+|微信小程序|支持|使用框架内置统计|
+|其他小程序|暂不支持|-|
+
+uni-app x App 的 VDOM 模式不在上述支持范围内，需继续使用 [uni-app x App VDOM 模式统计方案](uni-stat-uniappx.md#vdom)。
 
 ### 关闭统计
 
@@ -117,7 +134,9 @@
 
 在可视化界面勾选 **开启调试**，或将 `uniStatistics.debug` 设为 `true`。**修改后须重新编译并运行**才会生效。
 
-> **注意**：调试模式仅影响日志输出，**不影响是否上报**；只要统计已开启，即会发生数据上报。正式发布前请将 `debug` 设为 `false` 并重新发行。
+本地运行时，只有将 `uniStatistics.debug` 设为 `true`，统计才会采集并上报数据；未开启调试时，本地运行不采集、不上报，避免开发和测试数据进入正式统计。
+
+发行构建不受上述限制。统计开启后，发行版本会正常采集并上报数据；`debug` 仅控制调试日志，正式发布前建议设为 `false`。
 
 #### 查看日志
 
@@ -255,6 +274,55 @@
 - 分平台仅支持 `enable` 字段，`type`、`debug`、`reportInterval`、`collectItems` 等继承全局配置。
 
 :::
+
+#### uni-app x App 平台配置
+
+uni-app x 的公共统计配置仍位于根节点 `uniStatistics`。需要分平台开启或关闭时，App 平台使用以下节点：
+
+|平台|uni-app|uni-app x|
+|:-:|:-:|:-:|
+|Android|`app-plus`|`app-android`|
+|iOS|`app-plus`|`app-ios`|
+|HarmonyOS|`app-harmony`|`app-harmony`|
+|Web|`web`|`web`|
+|微信小程序|`mp-weixin`|`mp-weixin`|
+
+Android 和 iOS 的配置节点与 uni-app 不同，其他已支持平台的配置方式不变。
+
+```json
+{
+  "uni-app-x": {
+    "vapor": true
+  },
+  "uniStatistics": {
+    "enable": true,
+    "type": "public",
+    "debug": false,
+    "reportInterval": 10,
+    "collectItems": {
+      "uniPushClientID": false,
+      "uniStatPageLog": true
+    }
+  },
+  "app-android": {
+    "uniStatistics": {
+      "enable": true
+    }
+  },
+  "app-ios": {
+    "uniStatistics": {
+      "enable": true
+    }
+  },
+  "app-harmony": {
+    "uniStatistics": {
+      "enable": true
+    }
+  }
+}
+```
+
+平台节点显式配置 `uniStatistics.enable` 时，以平台配置为准；未配置时继承根节点的 `uniStatistics.enable`。分平台节点仅配置 `enable`，其他配置从根节点继承。
 
 ## 常见问题
 

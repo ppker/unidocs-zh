@@ -99,7 +99,9 @@ uni统计的开源且基于[uni-admin](https://doc.dcloud.net.cn/uniCloud/admin)
 
 ## 环境要求
 
-- `uni统计2.0 私有版` 客户端仅支持 **uni-app**，非 uni-app 项目无法使用。
+- 客户端支持 **uni-app** 项目，以及使用 `HBuilderX 5.25+` 的 **uni-app x** 项目。
+- uni-app x 的 App 端目前仅支持蒸汽模式，支持 App-Android、App-iOS 和 App-Harmony；同时支持 Web 和微信小程序。
+- uni-app x App 的 VDOM 模式暂不支持框架内置的 uni统计2.0，需使用 [uni-app x App VDOM 模式统计方案](uni-stat-uniappx.md#vdom)。
 - 云端依赖 **uniCloud**，但不要求业务应用全部基于 uniCloud 开发；主业务可连接传统服务器，统计打点与报表展示使用 uniCloud 即可。
 
 ## 使用教程
@@ -113,6 +115,21 @@ uni统计的开源且基于[uni-admin](https://doc.dcloud.net.cn/uniCloud/admin)
 在业务 App 项目的 `manifest.json` 中打开 **uni统计配置**，启用 **uni统计2.0 私有版**（可视化界面勾选私有版 / 2.0 私有部署；与 [公有版](uni-stat-public.md) **不可同时开启**）。
 
 ![开启统计](https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/iShot2022-05-17%2020.22.52.png)
+
+#### uni-app x 支持说明@uni-app-x
+
+从 `HBuilderX 5.25` 起，uni统计2.0私有版支持 uni-app x 蒸汽模式。统计模块由框架内置，无需安装或引用 `uni_modules/uni-stat`，应用启动、前后台切换和页面访问等数据由框架自动采集。
+
+|平台|支持情况|说明|
+|:-:|:-:|:-|
+|App-Android|支持|仅支持蒸汽模式|
+|App-iOS|支持|仅支持蒸汽模式|
+|App-Harmony|支持|仅支持蒸汽模式|
+|Web|支持|使用框架内置统计|
+|微信小程序|支持|使用框架内置统计|
+|其他小程序|暂不支持|-|
+
+uni-app x App 的 VDOM 模式不在上述支持范围内，需继续使用 [uni-app x App VDOM 模式统计方案](uni-stat-uniappx.md#vdom)。
 
 上述操作对应源码中的 `uniStatistics` 节点，规范如下。**若不关心字段细节，可跳过本小节，直接阅读 [小程序域名白名单](#小程序域名白名单)**。
 
@@ -173,9 +190,58 @@ uni统计的开源且基于[uni-admin](https://doc.dcloud.net.cn/uniCloud/admin)
 
 - 分平台存在 `uniStatistics.enable` 时优先使用分平台配置，否则继承全局设置。
 - 分平台仅支持 `enable`；`type`、`version`、`debug`、`reportInterval`、`collectItems` 等仅在全局生效。
-- 仅在**开启调试模式**或**发行/运行并开启统计**后才会正常上报数据（详见 [数据上报逻辑](#report-time)）。
+- 本地运行时，只有开启 `debug` 才会采集和上报；发行版本不受 `debug` 限制，统计开启后即正常采集和上报。
 
 :::
+
+#### uni-app x App 平台配置
+
+uni-app x 的公共统计配置仍位于根节点 `uniStatistics`。需要分平台开启或关闭时，App 平台使用以下节点：
+
+|平台|uni-app|uni-app x|
+|:-:|:-:|:-:|
+|Android|`app-plus`|`app-android`|
+|iOS|`app-plus`|`app-ios`|
+|HarmonyOS|`app-harmony`|`app-harmony`|
+|Web|`web`|`web`|
+|微信小程序|`mp-weixin`|`mp-weixin`|
+
+Android 和 iOS 的配置节点与 uni-app 不同，其他已支持平台的配置方式不变。
+
+```json
+{
+	"uni-app-x": {
+		"vapor": true
+	},
+	"uniStatistics": {
+		"enable": true,
+		"type": "private",
+		"debug": false,
+		"reportInterval": 10,
+		"collectItems": {
+			"uniPushClientID": false,
+			"uniStatPageLog": true
+		}
+	},
+	"app-android": {
+		"uniStatistics": {
+			"enable": true
+		}
+	},
+	"app-ios": {
+		"uniStatistics": {
+			"enable": true
+		}
+	},
+	"app-harmony": {
+		"uniStatistics": {
+			"enable": true
+		}
+	}
+}
+```
+
+平台节点显式配置 `uniStatistics.enable` 时，以平台配置为准；未配置时继承根节点的 `uniStatistics.enable`。分平台节点仅配置 `enable`，其他配置从根节点继承。
 
 
 #### 小程序域名白名单
@@ -196,7 +262,9 @@ uni统计的开源且基于[uni-admin](https://doc.dcloud.net.cn/uniCloud/admin)
 
 将 `manifest.json -> uniStatistics` 下的 `debug` 设为 `true` 或 `false`，用于开启或关闭 uni统计 调试模式。
 
-调试模式下会在控制台打印上报关键信息，便于核对采集是否正确，多用于自定义扩展场景。
+本地运行时，只有将 `uniStatistics.debug` 设为 `true`，统计才会采集并上报数据；未开启调试时，本地运行不采集、不上报，避免开发和测试数据进入正式统计。
+
+发行构建不受上述限制。统计开启后，发行版本会正常采集并上报数据；`debug` 仅控制调试日志，正式发布前建议设为 `false`。
 
 **日志格式**
 
