@@ -128,8 +128,6 @@ const dramaAd = uni.createDramaAd({
 })
 ```
 
-各 API 的 `successCallback` 在请求成功时调用，`failCallback` 在请求失败时调用；列表和详情接口的成功回调参数均为 `DramaListResult`。
-
 #### dramaAd.getList(options, successCallback, failCallback)
 
 获取短剧列表，用于自建聚合页渲染。
@@ -188,7 +186,7 @@ dramaAd.getHistoryList({ page: 1, pageSize: 20 }, (res) => {
 
 #### dramaAd.search(options, successCallback, failCallback)
 
-根据关键词搜索短剧。`searchWord` 为搜索关键词，`isFuzzy` 为是否模糊匹配（默认 `true`）。为兼容不同版本，也支持使用 `keyword`、`keyWord`、`query` 作为 `searchWord` 的别名，使用 `fuzzy` 作为 `isFuzzy` 的别名。返回结果中的 `extra.hasMore` 可用于判断是否还有下一页。
+根据关键词搜索短剧。`searchWord` 为搜索关键词，`isFuzzy` 为是否模糊匹配（默认 `true`）。返回结果中的 `extra.hasMore` 可用于判断是否还有下一页。
 
 ```ts
 interface DramaSearchOptions {
@@ -196,10 +194,6 @@ interface DramaSearchOptions {
   isFuzzy?: boolean
   page?: number
   pageSize?: number
-  keyword?: string
-  keyWord?: string
-  query?: string
-  fuzzy?: boolean
 }
 ```
 
