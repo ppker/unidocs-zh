@@ -37,7 +37,7 @@
   * uni统计2.0
     * [公有版](uni-stat-public.md)
     * [私有版](uni-stat-private.md)
-    * [uni-app x 接入说明](uni-stat-uniappx.md)
+    * [uni-app x VDOM 接入说明](uni-stat-uniappx.md)
   * [uni加固](/tutorial/app-security.md)
   * [uni隐私合规检测](/tutorial/app-privacy-detect.md)
   * [地图商业授权](/tutorial/app-geolocation.md?id=lic)

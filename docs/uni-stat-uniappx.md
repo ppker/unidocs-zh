@@ -1,35 +1,8 @@
-# uni-app x 下的 uni统计
+# uni-app x VDOM 模式统计接入
 
-uni-app x 的统计接入方式取决于 App 的渲染模式。公有版和私有版是 uni统计2.0 的服务形态；蒸汽模式和 VDOM 模式是 uni-app x 的渲染模式，二者属于不同的配置维度。
+本页说明 uni-app x App VDOM 模式下的统计接入方式。
 
-| 项目和平台 | 统计接入方式 |
-| :- | :- |
-| uni-app x App 蒸汽模式 | HBuilderX 5.25+ 框架内置 uni统计2.0 |
-| uni-app x Web | HBuilderX 5.25+ 框架内置 uni统计2.0 |
-| uni-app x 微信小程序 | HBuilderX 5.25+ 框架内置 uni统计2.0 |
-| uni-app x App VDOM 模式 | 使用本页的 `uni_modules/uni-stat` 插件方案 |
-
-## 蒸汽模式@vapor
-
-从 `HBuilderX 5.25` 起，uni-app x App 蒸汽模式支持框架内置的 uni统计2.0，覆盖 App-Android、App-iOS 和 App-Harmony；uni-app x Web 和微信小程序也支持框架内置统计。
-
-蒸汽模式的使用方式与现有 uni统计2.0一致：
-
-- 在 `manifest.json` 中开启统计；
-- 公有版和私有版二选一；
-- 无需安装或引用 `uni_modules/uni-stat`；
-- 无需手工上报应用启动、前后台切换和页面访问；
-- 可继续使用 `uni.report()` 上报自定义事件。
-
-具体配置和后台使用方式请参见 [uni统计2.0 公有版](uni-stat-public.md) 和 [uni统计2.0 私有版](uni-stat-private.md)。
-
-uni-app x App 的分平台配置节点与 uni-app 不同：Android 使用 `app-android`，iOS 使用 `app-ios`，HarmonyOS 使用 `app-harmony`；Web 和微信小程序的配置节点不变。
-
-::: warning 注意
-
-蒸汽模式项目不要同时引用 `uni_modules/uni-stat`。同时使用两种接入方式可能导致重复采集和重复上报。
-
-:::
+uni-app x App 蒸汽模式、Web 和微信小程序从 `HBuilderX 5.25` 起使用框架内置的 uni统计2.0，配置和使用方式与公有版、私有版文档一致，请分别参见 [uni统计2.0 公有版](uni-stat-public.md) 或 [uni统计2.0 私有版](uni-stat-private.md)。
 
 ## VDOM 模式@vdom
 
@@ -37,7 +10,7 @@ uni-app x App 的分平台配置节点与 uni-app 不同：Android 使用 `app-a
 
 ::: warning 注意
 
-本节方案不适用于 uni-app x App 蒸汽模式。蒸汽模式请按照上文使用 HBuilderX 内置的 uni统计2.0，勿重复安装统计插件。
+本页方案不适用于 uni-app x App 蒸汽模式。蒸汽模式项目请使用 HBuilderX 内置的 uni统计2.0，不要同时引用 `uni_modules/uni-stat`，否则可能造成重复采集和重复上报。
 
 :::
 
