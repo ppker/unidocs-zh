@@ -1,5 +1,6 @@
 import { defineConfig } from 'docs-sync-cli';
 
+// @ts-expect-error
 const isDev = process.env.NODE_ENV === 'development';
 
 interface FileMapping {
@@ -121,6 +122,8 @@ export default defineConfig({
     ...createSyncMapping([
       'collocation/main.md',
       'collocation/uni-scss.md',
+      'collocation/vite-config.md',
+      'collocation/vue-config.md'
     ]),
     // uni-publish
     ...createSyncMapping([
