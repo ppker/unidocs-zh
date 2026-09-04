@@ -334,49 +334,85 @@ webview示例
 
 #### 自定义模板@h5-template
 
-> 目前 Vue2 支持， Vue3 暂不支持
-
 需要使用自定义模板的场景，通常有以下几种情况：
 
 - 调整页面 head 中的 meta 配置
 - 补充 SEO 相关的一些配置（仅首页）
 - 加入百度统计等三方js
 
-使用自定义模板时，1. 工程根目录下新建一个html文件；2. 复制下面的基本模板内容，到这个html文件，在此基础上修改meta和引入js；3. 在 `manifest.json->h5->template` 节点中关联这个html文件的路径。
+##### Vue2 使用自定义模板@h5-template-vue2
+
+Vue2 使用自定义模板时
+
+1. 工程根目录下新建一个html文件；
+2. 复制下面的基本模板内容，到这个html文件，在此基础上修改meta和引入js；
+3. 在 `manifest.json->h5->template` 节点中关联这个html文件的路径。
 
 ```html
 <!DOCTYPE html>
 <html lang="zh-CN">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>
-			<%= htmlWebpackPlugin.options.title %>
-		</title>
-		<!-- Open Graph data -->
-		<!-- <meta property="og:title" content="Title Here" /> -->
-		<!-- <meta property="og:url" content="http://www.example.com/" /> -->
-		<!-- <meta property="og:image" content="http://example.com/image.jpg" /> -->
-		<!-- <meta property="og:description" content="Description Here" /> -->
-		<script>
-			var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') || CSS.supports('top: constant(a)'))
-			document.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' + (coverSupport ? ', viewport-fit=cover' : '') + '" />')
-		</script>
-		<link rel="stylesheet" href="<%= BASE_URL %>static/index.<%= VUE_APP_INDEX_CSS_HASH %>.css" />
-	</head>
-	<body>
-		<noscript>
-			<strong>Please enable JavaScript to continue.</strong>
-		</noscript>
-		<div id="app"></div>
-		<!-- built files will be auto injected -->
-	</body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>
+      <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <!-- Open Graph data -->
+    <!-- <meta property="og:title" content="Title Here" /> -->
+    <!-- <meta property="og:url" content="http://www.example.com/" /> -->
+    <!-- <meta property="og:image" content="http://example.com/image.jpg" /> -->
+    <!-- <meta property="og:description" content="Description Here" /> -->
+    <script>
+      var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') || CSS.supports('top: constant(a)'))
+      document.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' + (coverSupport ? ', viewport-fit=cover' : '') + '" />')
+    </script>
+    <link rel="stylesheet" href="<%= BASE_URL %>static/index.<%= VUE_APP_INDEX_CSS_HASH %>.css" />
+  </head>
+  <body>
+    <noscript>
+      <strong>Please enable JavaScript to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
 </html>
 ```
 
 在hello uni-app示例中有一个`template.h5.html`文件，即是此用途。
 
-**关于SEO的补充说明**
+##### Vue3 使用自定义模板@h5-template-vue3
+
+> Vue3 固定为 index.html 文件
+
+index.html 文件内容模板如下
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') || CSS.supports('top: constant(a)'));
+      document.write(
+        '<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' +
+          (coverSupport ? ', viewport-fit=cover' : '') +
+          '" />'
+      );
+    </script>
+    <title></title>
+    <!--preload-links-->
+    <!--app-context-->
+  </head>
+  <body>
+    <div id="app"><!--app-html--></div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
+```
+
+在hello uni-app示例中有一个`template.h5.html`文件，即是此用途。
+
+##### 关于SEO的补充说明
 
 H5平台是SPA单页应用，普通的SEO信息即加meta字段只能在，自定义的模板html里配置首页。
 
