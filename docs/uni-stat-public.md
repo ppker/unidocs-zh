@@ -1,5 +1,7 @@
 # uni统计2.0
 
+> 如遇到问题，进入 [IM 交流](https://im.dcloud.net.cn/#/?joinGroup=663b1aacea24b10030b08f16)
+
 `uni统计2.0`是DCloud提供的官方统计服务，具备**免费、全端覆盖、开箱即用**的特点。
 
 开发者开启`uni统计2.0`后，可在[uni统计控制台](https://tongji.dcloud.net.cn)查看 App、小程序、Web 等全平台的新增、活跃、留存、渠道等数据。

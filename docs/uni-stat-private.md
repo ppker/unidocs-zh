@@ -1,10 +1,10 @@
 # uni统计2.0 私有版
 
+> 如遇到问题，进入 [IM 交流](https://im.dcloud.net.cn/#/?joinGroup=663b1aacea24b10030b08f16)
+
 `uni统计2.0 私有版` 是开源、全端、云端一体的 uni-app 统计方案：前端采集内置于框架，统计报表与跑批逻辑通过 [uni-admin](https://doc.dcloud.net.cn/uniCloud/admin) 部署在**开发者自有的 uniCloud 服务空间**，数据完全自控。
 
 > 若只需登录控制台查看报表、无需自行部署后台，请使用 [uni统计2.0 公有版](uni-stat-public.md)。
->
-> 欢迎加入 [uni统计2.0 技术交流群](https://im.dcloud.net.cn/#/?joinGroup=663b1aacea24b10030b08f16)
 
 ## demo体验
 
